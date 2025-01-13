@@ -10,10 +10,12 @@ TAPAS is a BERT-like transformers model pretrained on a large corpus of English 
 
 Masked language modeling (MLM): taking a (flattened) table and associated context, the model randomly masks 15% of the words in the input, then runs the entire (partially masked) sequence through the model. The model then has to predict the masked words. This is different from traditional recurrent neural networks (RNNs) that usually see the words one after the other, or from autoregressive models like GPT which internally mask the future tokens. It allows the model to learn a bidirectional representation of a table and associated text.
 
+
 Intermediate pre-training: to encourage numerical reasoning on tables, the authors additionally pre-trained the model by creating a balanced dataset of millions of syntactically created training examples. Here, the model must predict (classify) whether a sentence is supported or refuted by the contents of a table. The training examples are created based on synthetic as well as counterfactual statements.
 This way, the model learns an inner representation of the English language used in tables and associated texts, which can then be used to extract features useful for downstream tasks such as answering questions about a table, or determining whether a sentence is entailed or refuted by the contents of a table. Fine-tuning is done by adding a cell selection head and aggregation head on top of the pre-trained model, and then jointly train these randomly initialized classification heads with the base model on SQa, WikiSQL and finally WTQ
 
 The `tapas-base-finetuned-wtq` model has been fine-tuned on the WikiTableQuestions (WTQ) dataset, allowing it to effectively interpret and answer questions based on the content of tables extracted from Wikipedia.
+
 
 ![Image](https://1.bp.blogspot.com/-SOS5yrSg0lw/XqsC0RyAXiI/AAAAAAAAF3g/BcOoE84UY64QtwoZC06YEe_6SblvxMncgCLcBGAsYHQ/s1600/image1.png)
 
